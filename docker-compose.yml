@@ -1,29 +1,22 @@
-version: '3.3'
+version: "3"
 services:
-  web:
-      #image: php:7.3.3-apache 
-      build:
-        context: .     
-        dockerfile: Dockerfile
-      container_name: php     
-      volumes:
-        - ./douglasApachePhpProject:/var/www/html
-      ports:
-      - '8000:80'  
-      depends_on:
-        - db  
+  php-apache:
+    build: .
+    ports:
+     - "8080:80"
+    links:
+     - dbmysql 
+    volumes:
+     - ./app:/var/www/html
 
-  db: 
-      container_name: mysql  
-      image: mysql:8.0         
-      restart: always
-      environment:        
-        MYSQL_DATABASE: auladouglas
-        MYSQL_ROOT_PASSWORD: root     
-      ports:
-        - '5001:3306'
-  
-      
-              
-
-    
+  dbmysql:
+    image: mysql:5
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: auladouglas
+      MYSQL_USER: admin 
+      MYSQL_PASSWORD: admin
+    ports:
+      - "8000:3306"
