@@ -14,7 +14,7 @@ class Conexao
     {		
 		$this->setTipoBanco("mysql");
 		$this->setServidor("localhost");
-		$this->setPorta("3306");
+		$this->setPorta("5001");
 		$this->setUsuario("root");
 		$this->setSenha("root");
 		$this->setBanco("auladouglas");

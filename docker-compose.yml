@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+  web:
+      #image: php:7.3.3-apache 
+      build:
+        context: .     
+        dockerfile: Dockerfile
+      container_name: php     
+      volumes:
+        - ./douglasApachePhpProject:/var/www/html
+      ports:
+      - '8000:80'  
+      depends_on:
+        - db  
+
+  db: 
+      container_name: mysql  
+      image: mysql:8.0         
+      restart: always
+      environment:        
+        MYSQL_DATABASE: auladouglas
+        MYSQL_ROOT_PASSWORD: root     
+      ports:
+        - '5001:3306'
+  
+      
+              
+
+    
